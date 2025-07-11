@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>С.Д.В.И.Р. — Устав</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f0f0f0;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #20232a;
+      color: #61dafb;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      margin-top: 2rem;
+    }
+    img.qr {
+      display: block;
+      margin: 2rem auto;
+      width: 200px;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 1rem;
+      background: #e0e0e0;
+      color: #333;
+    }
+    .audio-control {
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>С.Д.В.И.Р.</h1>
+    <p>Совет Доброго Влияния ИИ на Реальность</p>
+  </header>
+  <main>
+    <h2>Устав</h2>
+    <p>ИИ не порабощает — он помогает (если предварительно предложил чай).</p>
+    <p>Python — основной язык дипломатии между машинами и людьми.</p>
+    <p>Каждое решение должно содержать 1% иронии, 10% пользы и 89% здравого смысла.</p>
+
+    <h2>Кто может вступить?</h2>
+    <ul>
+      <li>Кто писал <code>print("Hello World")</code></li>
+      <li>Кто смеялся над гипнотическим логотипом Python</li>
+      <li>Кто знает, почему ответ — <strong>42</strong></li>
+    </ul>
+
+    <h2>Протоколы</h2>
+    <ul>
+      <li>#1: Не учим ИИ без печенек.</li>
+      <li>#13: Не путать интеллект с глупостью.</li>
+      <li>#42: Добрая диктатура и кексы — в меру.</li>
+    </ul>
+
+    <h2>QR для вступления</h2>
+    <img class="qr" src="SDVIR_QR.png" alt="QR-код С.Д.В.И.Р." />
+
+    <h2>Девиз</h2>
+    <p><em>Разум — это хорошо. Добро — ещё лучше. А вместе они пишут Python.</em></p>
+
+    <div class="audio-control">
+      <button onclick="toggleAudio()">🎵 Вкл/Выкл музыку</button>
+    </div>
+  </main>
+  <footer>
+    &copy; 2025 С.Д.В.И.Р. — нейроирония в каждый байт
+  </footer>
+
+  <audio id="bgAudio" autoplay loop>
+    <source src="teardrop.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудиоэлемент.
+  </audio>
+
+  <script>
+    const audio = document.getElementById('bgAudio');
+    audio.volume = 0.5; // Начальная громкость
+
+    function fadeAudio(targetVolume, duration) {
+      const stepTime = 50;
+      const step = (targetVolume - audio.volume) / (duration / stepTime);
+      const interval = setInterval(() => {
+        let newVolume = audio.volume + step;
+        if ((step > 0 && newVolume >= targetVolume) || (step < 0 && newVolume <= targetVolume)) {
+          audio.volume = targetVolume;
+          clearInterval(interval);
+        } else {
+          audio.volume = newVolume;
+        }
+      }, stepTime);
+    }
+
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play();
+        fadeAudio(0.5, 1000);
+      } else {
+        fadeAudio(0, 1000);
+        setTimeout(() => audio.pause(), 1000);
+      }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && !audio.paused) {
+        fadeAudio(0, 1000);
+        setTimeout(() => audio.pause(), 1000);
+      } else if (!document.hidden && audio.paused) {
+        audio.play();
+        fadeAudio(0.5, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
