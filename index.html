@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,9 +9,10 @@
     body {
       font-family: "Segoe UI", sans-serif;
       background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
-      background-image: url('https://images.unsplash.com/photo-1547234935-80c7145ec969?auto=format&fit=crop&w=1350&q=80');
+      background-image: url('golden_heart_ship.jpg');
       background-size: cover;
       background-attachment: fixed;
+      background-position: center;
       background-blend-mode: overlay;
       color: #eee;
       margin: 0;
@@ -162,39 +164,13 @@
     const audio = document.getElementById('bgAudio');
     audio.volume = 0.5;
 
-    function fadeAudio(targetVolume, duration) {
-      const stepTime = 50;
-      const step = (targetVolume - audio.volume) / (duration / stepTime);
-      const interval = setInterval(() => {
-        let newVolume = audio.volume + step;
-        if ((step > 0 && newVolume >= targetVolume) || (step < 0 && newVolume <= targetVolume)) {
-          audio.volume = targetVolume;
-          clearInterval(interval);
-        } else {
-          audio.volume = newVolume;
-        }
-      }, stepTime);
-    }
-
     function toggleAudio() {
       if (audio.paused) {
         audio.play();
-        fadeAudio(0.5, 1000);
       } else {
-        fadeAudio(0, 1000);
-        setTimeout(() => audio.pause(), 1000);
+        audio.pause();
       }
     }
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden && !audio.paused) {
-        fadeAudio(0, 1000);
-        setTimeout(() => audio.pause(), 1000);
-      } else if (!document.hidden && audio.paused) {
-        audio.play();
-        fadeAudio(0.5, 1000);
-      }
-    });
 
     function assignName() {
       const customName = document.getElementById("customName").value.trim();
